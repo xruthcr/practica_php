@@ -1,3 +1,33 @@
+<?php
+session_start();
+require_once("../includes/conexion.php");
+
+$message = "";
+$message_type = "";
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $nombre = $_POST['nombre'];
+    $correo = $_POST['correo'];
+    $password = $_POST['contraseña'];
+    $confirmar_password = $_POST['confirmar_contraseña'];
+    if($password == $confirmar_password){
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO usuario (nombre, correo, contraseña, tipo_usuario) VALUES ('$nombre', '$correo', '$hash', 2)";
+        if(mysqli_query($conexion, $sql)){
+            $_SESSION['usuario_id'] = mysqli_insert_id($conexion);
+            $_SESSION['usuario_nombre'] = $nombre;
+            header("Location: ../pages/dashboard.php");
+            exit();
+        } else {
+            $message = "Error: " . mysqli_error($conexion);
+            $message_type = "error";
+        }
+    } else {
+        $message = "Las contraseñas no coinciden";
+        $message_type = "error";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,29 +37,6 @@
     <link rel="stylesheet" href="../css/registro.css">
 </head>
 <body>
-  <?php
-require_once("../includes/conexion.php");
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $nombre = $_POST['nombre'];
-    $correo = $_POST['correo'];
-    $password = $_POST['contraseña'];
-    $confirmar_password = $_POST['confirmar_contraseña'];
-    $message = "";
-    if($password == $confirmar_password){
-        $hash = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO usuario (nombre, correo, contraseña, tipo_usuario) VALUES ('$nombre', '$correo', '$hash', 2)";
-        if(mysqli_query($conexion, $sql)){
-            $message = "Registro de usuario exitoso";
-        } else {
-            $message = "Error: " . mysqli_error($conexion);
-        }
-    } else {
-        $message = "<p>Las contraseñas no coinciden</p>";
-    }
-}
-
-?>
   <div class="rw">
     <div class="rc">
  
@@ -39,6 +46,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <h1 class="title">Crear cuenta</h1>
         <p class="subtitle">¿Ya tienes cuenta? <a href="./login.php">Inicia sesión</a></p>
  
+        <?php if ($message != ""): ?>
+        <div class="msg msg--<?php echo $message_type; ?>"><?php echo $message; ?></div>
+        <?php endif; ?>
+
         <div class="field">
           <label class="lbl" for="username">Nombre de usuario</label>
           <input class="inp" type="text" id="nombre" name="nombre" placeholder="ej. ana_garcia" autocomplete="username" />
@@ -86,7 +97,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  
       <div id="success">
         <div class="sicon"><i class="ti ti-check" aria-hidden="true"></i></div>
-        <p class="smsg"><?php echo $message; ?></p>
+        <p class="smsg">¡Cuenta creada con éxito!</p>
       </div>
  
     </div>

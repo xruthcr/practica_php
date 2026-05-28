@@ -199,6 +199,25 @@ body {
   text-decoration: underline;
 }
 
+/* ── Mensajes ── */
+.msg {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.msg--error {
+  background: #fdecea;
+  color: #a11;
+  border: 1px solid #f5c6cb;
+}
+.msg--success {
+  background: #eaf3de;
+  color: #3b6d11;
+  border: 1px solid #c3e6cb;
+}
+
 /* ── Botón ── */
 .btn {
   width: 100%;

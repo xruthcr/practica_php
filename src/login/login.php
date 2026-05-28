@@ -44,6 +44,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1 class="title">Inicia Sesion</h1>
         <p class="subtitle">¿Aun no tienes cuenta? <a href="./registro.php">Crear cuenta</a></p>
  
+        <?php if ($mensaje != ""): ?>
+        <div class="msg msg--error"><?php echo $mensaje; ?></div>
+        <?php endif; ?>
+
         <div class="field">
           <label class="lbl" for="username">Nombre de usuario</label>
           <input class="inp" type="text" id="usuario" name="usuario" placeholder="ej. ana_garcia" autocomplete="username" />
