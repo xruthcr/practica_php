@@ -1,0 +1,14 @@
+
+.promo {
+    background: var(--primary);
+    padding: 60px 0;
+    text-align: center;
+}
+
+
+.footer {
+    padding: 20px;
+    background: var(--dark);
+    color: white;
+    text-align: center;
+}

@@ -1,0 +1,48 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* VARIABLES */
+:root {
+    --primary: #ffC300;
+    --highlight: #ff2e63;
+    --dark: #7b4b2a;
+    --light: #fff4e6;
+    --elements: #ff6B00;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--light);
+    color: var(--dark);
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+/* BOTONES */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn--primario {
+    background: var(--primary);
+}
+
+.btn--secundario {
+    background: var(--dark);
+    color: white;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}

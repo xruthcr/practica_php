@@ -1,0 +1,30 @@
+services:
+  webserver:
+    build: .
+    working_dir: /var/www/html
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "8082:80"
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mi_proyecto
+    volumes:
+      - database-data:/var/lib/mysql
+
+  pma:
+    image: phpmyadmin:latest
+    ports:
+      - "8083:80"
+    links:
+      - mysql:db
+    environment:
+      - PMA_ARBITRARY=1
+
+volumes:
+  database-data:

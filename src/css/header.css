@@ -1,0 +1,54 @@
+/* Estilo del HEADER y NavBar */
+.navbar {
+    position: sticky;
+    top: 0;
+    background: var(--light);
+    z-index: 1000;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.navbar__contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar__logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar__menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar__lista {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.navbar__lista a {
+    text-decoration: none;
+    color: var(--dark);
+    transition: 0.3s;
+}
+
+.navbar__lista a:hover {
+    color: var(--primary);
+}
+.navbar__cta {
+    margin-left: 10px;
+}
+
+/* Boton toggle */
+.navbar__toggle {
+    display: none;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
